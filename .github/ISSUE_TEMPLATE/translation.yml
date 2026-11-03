@@ -1,0 +1,48 @@
+name: Translation
+description: Volunteer to translate BetterMathType or review an existing translation.
+title: "[Translation]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping make BetterMathType accessible to more people.
+
+        README translations are ready to accept today. The interface is currently English-only; for interface translations, use this issue to coordinate string extraction into locale files before opening a large pull request. Read the [translation guide](https://github.com/mki169/bettermathtype/blob/main/docs/TRANSLATING.md) first.
+  - type: input
+    id: language
+    attributes:
+      label: Language
+      placeholder: Spanish, Brazilian Portuguese, Simplified Chinese
+    validations:
+      required: true
+  - type: input
+    id: locale
+    attributes:
+      label: Locale code
+      description: Use a BCP 47 tag such as `es`, `pt-BR`, or `zh-CN`.
+      placeholder: es
+    validations:
+      required: true
+  - type: checkboxes
+    id: scope
+    attributes:
+      label: Scope
+      description: Select everything you would like to help with.
+      options:
+        - label: README
+        - label: Documentation
+        - label: Interface strings
+        - label: Review an existing translation
+  - type: textarea
+    id: details
+    attributes:
+      label: Details
+      description: Anything else the maintainers should know, such as prior translation experience or localization conventions.
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      options:
+        - label: I have read the translation guide.
+          required: true
+        - label: I can help review this translation.

@@ -15,6 +15,8 @@
   <a href="https://www.mathjax.org"><img src="https://img.shields.io/badge/MathJax-3.2-0b5cad" alt="MathJax 3" /></a>
   <img src="https://img.shields.io/badge/output-SVG%20for%20Word-2b579a?logo=microsoftword&logoColor=white" alt="SVG output for Word" />
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-ISC-blue" alt="ISC license" /></a>
+  <a href="CONTRIBUTING.md"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen" alt="PRs welcome" /></a>
+  <a href="docs/TRANSLATING.md"><img src="https://img.shields.io/badge/translations-welcome-1a9a6e" alt="Translations welcome" /></a>
 </p>
 
 <p align="center">
@@ -42,6 +44,7 @@
 - [Browser support](#browser-support)
 - [Privacy](#privacy)
 - [Project structure](#project-structure)
+- [Translations](#translations)
 - [Contributing](#contributing)
 - [License](#license)
 - [Acknowledgements](#acknowledgements)
@@ -205,29 +208,45 @@ Use **Preferences → Clear local data** to remove the document and recent histo
 
 ```text
 .
-├── index.html              Application shell and early theme setup
-├── src/
-│   ├── main.js             Editor, rendering, export, persistence, and theme logic
-│   ├── toolbar.js          Ribbon tabs, symbol groups, and examples
-│   └── styles.css          Application styles and dark theme overrides
+├── .github/
+│   ├── ISSUE_TEMPLATE/     Bug, feature, and translation issue forms
+│   └── PULL_REQUEST_TEMPLATE.md
+├── docs/
+│   ├── screenshots/        README screenshots
+│   └── TRANSLATING.md      Translation guide
 ├── public/
 │   ├── favicon.svg
 │   ├── mathlive-fonts/     Self-hosted MathLive fonts
 │   └── vendor/             Prebuilt MathJax STIX 2 bundle
-├── docs/screenshots/       README screenshots
+├── src/
+│   ├── main.js             Editor, rendering, export, persistence, and theme logic
+│   ├── toolbar.js          Ribbon tabs, symbol groups, and examples
+│   └── styles.css          Application styles and dark theme overrides
+├── CONTRIBUTING.md
+├── LICENSE
+├── README.md
+├── index.html              Application shell and early theme setup
 ├── package.json
 └── package-lock.json
 ```
 
 `dist/` and `node_modules/` are generated and excluded from version control.
 
+## Translations
+
+The interface is currently English-only. README and documentation translations are welcome, and interface translation can be coordinated once the strings are extracted.
+
+- Read the [translation guide](docs/TRANSLATING.md).
+- Open a [translation issue](https://github.com/mki169/bettermathtype/issues/new?template=translation.yml) to claim a language.
+- Translation pull requests should be reviewed by a native speaker.
+
 ## Contributing
 
-Issues and pull requests are welcome. Before opening a pull request:
+Contributions are welcome. Read [CONTRIBUTING.md](CONTRIBUTING.md) for development setup, project conventions, and the review process.
 
-1. Run `npm run build` and confirm it succeeds.
-2. Verify the affected flow in a browser at desktop and mobile widths.
-3. Keep the change focused and match the existing code style.
+- [Report a bug](https://github.com/mki169/bettermathtype/issues/new?template=bug_report.yml)
+- [Request a feature](https://github.com/mki169/bettermathtype/issues/new?template=feature_request.yml)
+- [Start a translation](https://github.com/mki169/bettermathtype/issues/new?template=translation.yml)
 
 There is currently no automated test suite, so browser verification is the primary check.
 
