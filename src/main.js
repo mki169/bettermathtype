@@ -7,6 +7,8 @@ const $$ = (selector, root = document) => Array.from(root.querySelectorAll(selec
 
 const STORAGE_KEY = 'bettermathtype:document';
 const RECENT_KEY = 'bettermathtype:recent';
+const THEME_KEY = 'bettermathtype:theme';
+const themeQuery = window.matchMedia('(prefers-color-scheme: dark)');
 const SIZES = [10, 11, 12, 14, 18, 24, 36];
 const ZOOMS = [1, 1.25, 1.5, 1.75, 2, 2.5];
 const isMac = /Mac|iPhone|iPad|iPod/.test(navigator.platform || navigator.userAgent);
@@ -18,6 +20,7 @@ const state = {
   previewMode: 'inline',
   baseline: false,
   autosave: true,
+  theme: 'system',
   zoom: 1.5,
   activeTab: 'home',
   result: null,
@@ -69,6 +72,7 @@ const infoDialog = $('#infoDialog');
 const copyDialog = $('#copyDialog');
 const svgSource = $('#svgSource');
 const fileInput = $('#fileInput');
+const themeToggleBtn = $('#themeToggleBtn');
 
 const iconCache = new Map();
 let hiddenMeasure;
@@ -758,6 +762,11 @@ const actionHandlers = {
     if (state.autosave) scheduleSave({ immediate: true });
     showToast(state.autosave ? 'Autosave enabled' : 'Autosave disabled');
   },
+  'toggle-theme': () => toggleTheme(),
+  'system-theme': () => {
+    setTheme('system');
+    showToast('Following system theme');
+  },
   'clear-local': () => {
     try {
       localStorage.removeItem(STORAGE_KEY);
@@ -964,6 +973,66 @@ function setupTooltips() {
   window.addEventListener('resize', hideTooltip);
 }
 
+function storedTheme() {
+  try {
+    const value = localStorage.getItem(THEME_KEY);
+    return value === 'light' || value === 'dark' ? value : null;
+  } catch {
+    return null;
+  }
+}
+
+function effectiveTheme() {
+  if (state.theme === 'system') return themeQuery.matches ? 'dark' : 'light';
+  return state.theme;
+}
+
+function applyTheme() {
+  const theme = effectiveTheme();
+  document.documentElement.dataset.theme = theme;
+  const meta = document.querySelector('meta[name="theme-color"]');
+  if (meta) meta.setAttribute('content', theme === 'dark' ? '#0d131c' : '#f7f8fb');
+  if (themeToggleBtn) {
+    const isDark = theme === 'dark';
+    const label = isDark ? 'Switch to light mode' : 'Switch to dark mode';
+    themeToggleBtn.setAttribute('aria-pressed', String(isDark));
+    themeToggleBtn.setAttribute('aria-label', label);
+    themeToggleBtn.title = label;
+  }
+}
+
+function setTheme(theme) {
+  state.theme = theme === 'light' || theme === 'dark' ? theme : 'system';
+  try {
+    if (state.theme === 'system') localStorage.removeItem(THEME_KEY);
+    else localStorage.setItem(THEME_KEY, state.theme);
+  } catch {
+    // ignore storage errors
+  }
+  applyTheme();
+  updateMenuChecks();
+}
+
+function toggleTheme() {
+  const next = effectiveTheme() === 'dark' ? 'light' : 'dark';
+  setTheme(next);
+  showToast(next === 'dark' ? 'Dark mode enabled' : 'Light mode enabled');
+}
+
+function setupTheme() {
+  state.theme = storedTheme() || 'system';
+  applyTheme();
+  themeToggleBtn?.addEventListener('click', toggleTheme);
+  const handleSystemChange = () => {
+    if (state.theme === 'system') applyTheme();
+  };
+  if (typeof themeQuery.addEventListener === 'function') {
+    themeQuery.addEventListener('change', handleSystemChange);
+  } else if (typeof themeQuery.addListener === 'function') {
+    themeQuery.addListener(handleSystemChange);
+  }
+}
+
 function updateMenuChecks() {
   const previewChecks = $$('[data-check="preview"]');
   previewChecks.forEach((item) => {
@@ -990,6 +1059,20 @@ function updateMenuChecks() {
     item.classList.toggle('is-checked', state.autosave);
     const check = item.querySelector('.menu-check');
     if (check) check.textContent = state.autosave ? '✓' : '';
+  });
+
+  $$('[data-check="theme"]').forEach((item) => {
+    const active = state.theme === 'dark';
+    item.classList.toggle('is-checked', active);
+    const check = item.querySelector('.menu-check');
+    if (check) check.textContent = active ? '✓' : '';
+  });
+
+  $$('[data-check="system-theme"]').forEach((item) => {
+    const active = state.theme === 'system';
+    item.classList.toggle('is-checked', active);
+    const check = item.querySelector('.menu-check');
+    if (check) check.textContent = active ? '✓' : '';
   });
 
   const previewToggle = $('[data-action="toggle-preview"]');
@@ -1651,6 +1734,7 @@ function setupActions() {
 
 async function init() {
   applyPlatformLabels();
+  setupTheme();
   restoreState();
   createMeasureContainer();
   renderExamples();
