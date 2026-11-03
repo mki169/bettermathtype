@@ -18,6 +18,7 @@
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-ISC-blue" alt="ISC license" /></a>
   <a href="CONTRIBUTING.md"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen" alt="PRs welcome" /></a>
   <a href="docs/TRANSLATING.md"><img src="https://img.shields.io/badge/translations-welcome-1a9a6e" alt="Translations welcome" /></a>
+  <a href="https://github.com/mki169/bettermathtype"><img src="https://img.shields.io/github/stars/mki169/bettermathtype?style=social" alt="GitHub stars" /></a>
 </p>
 
 <p align="center">
@@ -36,11 +37,19 @@
 
 ## Why I built this
 
-MathType is a paid product, and my trial expired. Around the same time, I noticed how much the editor lagged for the simple loop I actually use: type an equation, choose a point size, copy it, and paste it into Word. The core idea is not complicated. So I built it myself.
+MathType is a paid product, and my trial expired. That was the trigger, but the bigger issue was the fit. For the simple loop I actually use — type an equation, choose a point size, copy it, and paste it into Word — the editor felt heavy and laggy.
 
-BetterMathType is not trying to recreate every advanced MathType workflow. It is the small, fast, browser-based editor I wanted: quick to open, keyboard-friendly, high-resolution output, and no subscription.
+The core idea is simple. I did not need a full desktop suite, a subscription, or a trial timer to put an equation in a document. So I built the tool I wanted:
 
-That is where this repo came from.
+- fast to open
+- keyboard-friendly
+- high-resolution Word output
+- available in the browser
+- free and open source
+
+BetterMathType is not trying to recreate every advanced MathType workflow. It focuses on the one job I do most. That is where this repo came from.
+
+If it saves you time, please [star the repository](https://github.com/mki169/bettermathtype). It helps other people find it.
 
 ## Contents
 
@@ -55,8 +64,10 @@ That is where this repo came from.
 - [Browser support](#browser-support)
 - [Privacy](#privacy)
 - [Project structure](#project-structure)
+- [Security](#security)
 - [Translations](#translations)
 - [Contributing](#contributing)
+- [Star history](#star-history)
 - [License](#license)
 - [Acknowledgements](#acknowledgements)
 
@@ -232,12 +243,16 @@ Use **Preferences → Clear local data** to remove the document and recent histo
 
 ```text
 .
+├── .editorconfig
+├── .gitattributes
 ├── .github/
-│   ├── ISSUE_TEMPLATE/     Bug, feature, and translation issue forms
-│   ├── workflows/          CI build and smoke test
+│   ├── ISSUE_TEMPLATE/     Bug, feature, translation, and security links
+│   ├── workflows/          CI, CodeQL, and dependency review
 │   ├── CODEOWNERS
 │   ├── dependabot.yml
 │   └── PULL_REQUEST_TEMPLATE.md
+├── .gitignore
+├── .nvmrc
 ├── docs/
 │   ├── screenshots/        README gallery screenshots
 │   ├── architecture.svg    Rendering pipeline diagram
@@ -253,12 +268,17 @@ Use **Preferences → Clear local data** to remove the document and recent histo
 ├── CONTRIBUTING.md
 ├── LICENSE
 ├── README.md
+├── SECURITY.md
 ├── index.html              Application shell and early theme setup
 ├── package.json
 └── package-lock.json
 ```
 
 `dist/` and `node_modules/` are generated and excluded from version control.
+
+## Security
+
+Security reports should be sent privately. See [SECURITY.md](SECURITY.md) for the supported versions and the reporting process. Please do not open a public issue for a vulnerability.
 
 ## Translations
 
@@ -276,7 +296,19 @@ Contributions are welcome. Read [CONTRIBUTING.md](CONTRIBUTING.md) for developme
 - [Request a feature](https://github.com/mki169/bettermathtype/issues/new?template=feature_request.yml)
 - [Start a translation](https://github.com/mki169/bettermathtype/issues/new?template=translation.yml)
 
-There is currently no automated test suite, so browser verification is the primary check. CI builds and smoke-tests every change, and Dependabot keeps dependencies current.
+There is currently no automated test suite, so browser verification is the primary check. CI builds and smoke-tests every change, CodeQL and Dependency Review run on pull requests, and Dependabot keeps dependencies current.
+
+## Star history
+
+If BetterMathType saves you time, please [star the repository](https://github.com/mki169/bettermathtype). Stars help other people discover the project.
+
+<a href="https://www.star-history.com/?repos=mki169%2Fbettermathtype&type=date&legend=top-left">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=mki169/bettermathtype&type=date&theme=dark&legend=top-left" />
+    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=mki169/bettermathtype&type=date&legend=top-left" />
+    <img src="https://api.star-history.com/chart?repos=mki169/bettermathtype&type=date&legend=top-left" alt="Star history chart" />
+  </picture>
+</a>
 
 ## License
 

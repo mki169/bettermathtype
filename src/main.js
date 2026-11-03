@@ -8,6 +8,8 @@ const $$ = (selector, root = document) => Array.from(root.querySelectorAll(selec
 const STORAGE_KEY = 'bettermathtype:document';
 const RECENT_KEY = 'bettermathtype:recent';
 const THEME_KEY = 'bettermathtype:theme';
+const ONBOARDING_KEY = 'bettermathtype:onboarded';
+const REPO_URL = 'https://github.com/mki169/bettermathtype';
 const themeQuery = window.matchMedia('(prefers-color-scheme: dark)');
 const SIZES = [10, 11, 12, 14, 18, 24, 36];
 const ZOOMS = [1, 1.25, 1.5, 1.75, 2, 2.5];
@@ -73,6 +75,7 @@ const copyDialog = $('#copyDialog');
 const svgSource = $('#svgSource');
 const fileInput = $('#fileInput');
 const themeToggleBtn = $('#themeToggleBtn');
+const welcomeDialog = $('#welcomeDialog');
 
 const iconCache = new Map();
 let hiddenMeasure;
@@ -782,6 +785,7 @@ const actionHandlers = {
   shortcuts: () => openInfo('shortcuts'),
   'word-help': () => openInfo('word'),
   about: () => openInfo('about'),
+  'star-github': () => window.open(REPO_URL, '_blank', 'noopener,noreferrer'),
 };
 
 function runAction(action, item) {
@@ -1541,6 +1545,21 @@ function setupDialogs() {
   });
 }
 
+function setupOnboarding() {
+  if (!welcomeDialog || typeof welcomeDialog.showModal !== 'function') return;
+  let completed = false;
+  try {
+    completed = localStorage.getItem(ONBOARDING_KEY) === '1';
+  } catch {}
+  if (completed) return;
+  welcomeDialog.addEventListener('close', () => {
+    try {
+      localStorage.setItem(ONBOARDING_KEY, '1');
+    } catch {}
+  }, { once: true });
+  if (!welcomeDialog.open) welcomeDialog.showModal();
+}
+
 async function setupMathField() {
   await customElements.whenDefined('math-field');
   mf.virtualKeyboardMode = 'off';
@@ -1771,6 +1790,8 @@ async function init() {
     setStatus('error', 'Output engine failed');
     showToast('The SVG output engine failed to load. Check the browser console.', { error: true, duration: 7000 });
   }
+
+  setupOnboarding();
 }
 
 init();

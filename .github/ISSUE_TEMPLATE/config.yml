@@ -6,3 +6,6 @@ contact_links:
   - name: Usage and keyboard shortcuts
     url: https://github.com/mki169/bettermathtype#usage
     about: Editor basics, export options, and shortcuts
+  - name: Report a security vulnerability
+    url: https://github.com/mki169/bettermathtype/security/advisories/new
+    about: Report a vulnerability privately. Do not open a public issue.

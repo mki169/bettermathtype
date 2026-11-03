@@ -193,6 +193,8 @@
             <button type="button" class="menu-item" data-action="word-help"><span class="menu-check"></span><span>Pasting into Word</span></button>
             <div class="menu-separator"></div>
             <button type="button" class="menu-item" data-action="about"><span class="menu-check"></span><span>About BetterMathType</span></button>
+            <div class="menu-separator"></div>
+            <button type="button" class="menu-item" data-action="star-github"><span class="menu-check"></span><span>Star on GitHub</span></button>
           </div>
         </div>
 
@@ -339,6 +341,10 @@
           <span class="status-chip status-chip-soft">SVG</span>
         </div>
         <div class="status-right">
+          <a class="status-star" href="https://github.com/mki169/bettermathtype" target="_blank" rel="noopener noreferrer" title="Star BetterMathType on GitHub">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3.6 2.6 5.27 5.82.85-4.21 4.1.99 5.79L12 16.87l-5.2 2.74.99-5.79-4.21-4.1 5.82-.85L12 3.6Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+            <span>Star</span>
+          </a>
           <span class="zoom-label">Editor</span>
           <button type="button" class="zoom-button" id="zoomOutBtn" aria-label="Zoom out">−</button>
           <button type="button" class="zoom-value" id="zoomValue" title="Reset editor zoom">150%</button>
@@ -379,6 +385,52 @@
       <div class="dialog-footer">
         <button type="button" class="button button-secondary" data-close-dialog>Close</button>
         <button type="button" class="button button-primary" id="downloadFromDialogBtn">Download SVG</button>
+      </div>
+    </dialog>
+
+    <dialog class="dialog onboarding-dialog" id="welcomeDialog" aria-labelledby="welcomeTitle">
+      <div class="dialog-header">
+        <div>
+          <span class="eyebrow">Welcome</span>
+          <h2 id="welcomeTitle">Three steps to a Word-ready equation</h2>
+        </div>
+        <button type="button" class="dialog-close" data-close-dialog aria-label="Close">×</button>
+      </div>
+      <div class="dialog-body">
+        <div class="onboarding-steps">
+          <div class="onboarding-step">
+            <span class="onboarding-step-number">1</span>
+            <div>
+              <strong>Type or pick a template</strong>
+              <p>Write LaTeX directly, or use the ribbon for fractions, roots, integrals, matrices, Greek letters, and accents.</p>
+            </div>
+          </div>
+          <div class="onboarding-step">
+            <span class="onboarding-step-number">2</span>
+            <div>
+              <strong>Choose the exact point size</strong>
+              <p>Use the Size menu and check the live Word preview. The measured dimensions update as you type.</p>
+            </div>
+          </div>
+          <div class="onboarding-step">
+            <span class="onboarding-step-number">3</span>
+            <div>
+              <strong>Copy and paste</strong>
+              <p>Select Copy for Word, then paste into Word. SVG and PNG downloads are available from the File menu.</p>
+            </div>
+          </div>
+        </div>
+        <p class="onboarding-note">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3.6 2.6 5.27 5.82.85-4.21 4.1.99 5.79L12 16.87l-5.2 2.74.99-5.79-4.21-4.1 5.82-.85L12 3.6Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+          <span>BetterMathType is free and open source. If it saves you time, a star helps other people find it.</span>
+        </p>
+      </div>
+      <div class="dialog-footer onboarding-footer">
+        <a class="button button-secondary" href="https://github.com/mki169/bettermathtype" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3.6 2.6 5.27 5.82.85-4.21 4.1.99 5.79L12 16.87l-5.2 2.74.99-5.79-4.21-4.1 5.82-.85L12 3.6Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+          Star on GitHub
+        </a>
+        <button class="button button-primary" id="onboardingStartBtn" type="button" data-close-dialog>Start editing</button>
       </div>
     </dialog>
 

@@ -1577,6 +1577,29 @@ kbd {
   justify-content: flex-end;
 }
 
+.status-star {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 20px;
+  padding: 0 5px;
+  border-radius: 4px;
+  color: inherit;
+  font-size: 9.5px;
+  text-decoration: none;
+  flex: none;
+}
+
+.status-star svg {
+  width: 11px;
+  height: 11px;
+}
+
+.status-star:hover {
+  background: var(--surface-muted);
+  color: var(--blue-deep);
+}
+
 .status-chip {
   padding: 2px 6px;
   border: 1px solid #e2e7ef;
@@ -1841,6 +1864,84 @@ kbd {
   font-size: 10px;
   line-height: 1.5;
   resize: vertical;
+}
+
+.onboarding-dialog {
+  width: min(640px, calc(100vw - 32px));
+}
+
+.onboarding-steps {
+  display: grid;
+  gap: 15px;
+  margin: 2px 0 18px;
+}
+
+.onboarding-step {
+  display: grid;
+  grid-template-columns: 30px minmax(0, 1fr);
+  gap: 11px;
+  align-items: start;
+}
+
+.onboarding-step-number {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--blue-soft);
+  color: var(--blue-deep);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.onboarding-step strong {
+  display: block;
+  color: var(--ink);
+  font-size: 12.5px;
+  font-weight: 650;
+}
+
+.onboarding-step p {
+  margin: 3px 0 0;
+  color: var(--muted);
+  font-size: 11.5px;
+  line-height: 1.55;
+}
+
+.onboarding-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  margin: 0;
+  padding: 11px 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--blue-softer);
+  color: var(--ink-soft);
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.onboarding-note svg {
+  width: 16px;
+  height: 16px;
+  flex: none;
+  margin-top: 1px;
+  color: var(--blue);
+}
+
+.onboarding-footer {
+  justify-content: space-between;
+}
+
+.onboarding-footer .button {
+  text-decoration: none;
+}
+
+.onboarding-footer .button svg {
+  width: 15px;
+  height: 15px;
 }
 
 .sr-only {
@@ -2530,7 +2631,8 @@ kbd {
     white-space: nowrap;
   }
 
-  .zoom-label {
+  .zoom-label,
+  .status-star span {
     display: none;
   }
 

@@ -10,6 +10,7 @@ This guide covers:
 - [Issues](#issues)
 - [Pull requests](#pull-requests)
 - [Automated checks](#automated-checks)
+- [Security](#security)
 - [Translations](#translations)
 - [Review and merge](#review-and-merge)
 - [License](#license)
@@ -91,7 +92,13 @@ Every push to `main` and every pull request runs the CI workflow in `.github/wor
 - builds the production bundle
 - smoke-tests the built site and its required static assets
 
+CodeQL scans the JavaScript source on pushes to `main`, on pull requests, and on a weekly schedule. Dependency Review checks pull requests for high-severity dependency vulnerabilities.
+
 Dependabot opens weekly pull requests for npm and GitHub Actions updates. Let CI validate those changes and keep unrelated edits out of dependency pull requests.
+
+## Security
+
+Do not report security vulnerabilities in public issues. Follow [SECURITY.md](SECURITY.md) and use GitHub's private vulnerability reporting.
 
 ## Translations
 
