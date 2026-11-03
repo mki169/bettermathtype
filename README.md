@@ -4,6 +4,14 @@ A MathType-inspired equation editor that renders crisp, Times New Roman-compatib
 
 Everything runs in the browser: no backend, no API keys, no analytics. Documents, recent equations, and theme preference are stored in `localStorage`.
 
+## Deploy
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fmki169%2Fbettermathtype)
+
+The Vercel button clones this repository into your own Git account, so you need access to it while signed in to GitHub and Vercel. If the button cannot access this private repository, use the manual import steps below.
+
+Cloudflare does not offer a one-click Deploy button for Pages (its Deploy button supports Workers only, and requires a public repository). Use [Workers & Pages → Create application](https://dash.cloudflare.com/?to=/:account/workers-and-pages) and the Pages steps below.
+
 ## Features
 
 - Visual equation editing with [MathLive](https://mathlive.io/) and LaTeX input.
