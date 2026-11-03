@@ -5,12 +5,12 @@
 <h1 align="center">BetterMathType</h1>
 
 <p align="center">
-  <strong>A MathType-inspired equation editor with Word-ready output.</strong><br />
+  <strong>An open-source, MathType-inspired equation editor with Word-ready output.</strong><br />
   Write LaTeX, preview it at true point size, and paste crisp equations into Microsoft Word.
 </p>
 
 <p align="center">
-  <a href="https://github.com/mki169/bettermathtype/actions/workflows/ci.yml"><img src="https://img.shields.io/badge/CI-GitHub%20Actions-2088FF?logo=githubactions&logoColor=white" alt="CI on GitHub Actions" /></a>
+  <a href="https://github.com/mki169/bettermathtype/actions/workflows/ci.yml"><img src="https://github.com/mki169/bettermathtype/actions/workflows/ci.yml/badge.svg?branch=main" alt="CI status" /></a>
   <a href="https://vite.dev"><img src="https://img.shields.io/badge/Vite-8-646CFF?logo=vite&logoColor=white" alt="Vite 8" /></a>
   <a href="https://mathlive.io"><img src="https://img.shields.io/badge/MathLive-0.111-1a9a6e" alt="MathLive" /></a>
   <a href="https://www.mathjax.org"><img src="https://img.shields.io/badge/MathJax-3.2-0b5cad" alt="MathJax 3" /></a>
@@ -34,8 +34,17 @@
 
 > The Microsoft Word preview intentionally stays paper-white in both themes, so what you see matches what you paste.
 
+## Why I built this
+
+MathType is a paid product, and my trial expired. Around the same time, I noticed how much the editor lagged for the simple loop I actually use: type an equation, choose a point size, copy it, and paste it into Word. The core idea is not complicated. So I built it myself.
+
+BetterMathType is not trying to recreate every advanced MathType workflow. It is the small, fast, browser-based editor I wanted: quick to open, keyboard-friendly, high-resolution output, and no subscription.
+
+That is where this repo came from.
+
 ## Contents
 
+- [Why I built this](#why-i-built-this)
 - [Features](#features)
 - [Gallery](#gallery)
 - [Quick start](#quick-start)
@@ -157,7 +166,7 @@ The site must be served from a domain root, not a subpath. Asset URLs (`/assets`
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fmki169%2Fbettermathtype)
 
-The button clones this repository into your own Git account, so you need access to it while signed in to GitHub and Vercel. If the button cannot access this private repository, import it manually:
+The button clones this repository into your own Git account. If it does not work for you, import it manually:
 
 1. In Vercel, choose **Add New → Project** and import the repository.
 2. Confirm **Framework Preset: Vite**, **Build Command: `npm run build`**, and **Output Directory: `dist`**.
@@ -176,7 +185,7 @@ Documentation: [Vite on Vercel](https://vercel.com/docs/frameworks/frontend/vite
 
 ### Cloudflare Pages
 
-Cloudflare does not provide a one-click Deploy button for Pages. Its Deploy button supports Workers only and requires a public repository. Use the dashboard flow instead:
+Cloudflare does not provide a one-click Deploy button for Pages; its Deploy button supports Workers only. Use the dashboard flow instead:
 
 1. Go to **Workers & Pages → Create application → Pages → Connect to Git**.
 2. Authorize GitHub, select the repository, and set the production branch to `main`.
