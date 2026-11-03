@@ -10,7 +10,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/mki169/bettermathtype/actions/workflows/ci.yml"><img src="https://github.com/mki169/bettermathtype/actions/workflows/ci.yml/badge.svg?branch=main" alt="CI status" /></a>
+  <a href="https://github.com/mki169/bettermathtype/actions/workflows/ci.yml"><img src="https://img.shields.io/badge/CI-GitHub%20Actions-2088FF?logo=githubactions&logoColor=white" alt="CI on GitHub Actions" /></a>
   <a href="https://vite.dev"><img src="https://img.shields.io/badge/Vite-8-646CFF?logo=vite&logoColor=white" alt="Vite 8" /></a>
   <a href="https://mathlive.io"><img src="https://img.shields.io/badge/MathLive-0.111-1a9a6e" alt="MathLive" /></a>
   <a href="https://www.mathjax.org"><img src="https://img.shields.io/badge/MathJax-3.2-0b5cad" alt="MathJax 3" /></a>
