@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f7f8fb" />
+    <meta
+      name="description"
+      content="BetterMathType — a MathType-inspired equation editor with crisp Times New Roman output designed for Microsoft Word."
+    />
+    <title>BetterMathType — Equation Studio</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <script>
+      window.MathJax = {
+        tex: {
+          packages: { '[+]': ['ams', 'mathtools', 'cancel', 'color', 'bbox', 'boldsymbol'] },
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+        },
+        svg: { fontCache: 'local' },
+        options: { enableMenu: false },
+        startup: { typeset: false },
+      };
+    </script>
+    <script defer src="/vendor/mathjax-stix2.js"></script>
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="app-header">
+        <div class="brand" aria-label="BetterMathType">
+          <div class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M7 24.25 14.2 7h4.02L25 24.25h-4.1l-1.45-4.02h-7.02l-1.45 4.02H7Z" fill="currentColor" opacity=".18"/>
+              <path d="M8.9 21.2h4.54L11.25 12.8h-.12L8.9 21.2Zm5.4-11.2h3.13l3.44 8.86h.12L21.9 10h3.02l-5.58 14h-2.8L10.98 10Z" fill="currentColor"/>
+              <path d="M6 26.6h20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity=".5"/>
+            </svg>
+          </div>
+          <div class="brand-copy">
+            <span class="brand-name">BetterMathType</span>
+            <span class="brand-sub">Equation Studio</span>
+          </div>
+        </div>
+
+        <div class="document-pill" aria-label="Current document">
+          <span class="document-dot" aria-hidden="true"></span>
+          <span>Untitled equation</span>
+          <span class="document-state" id="saveState">Saved locally</span>
+        </div>
+
+        <div class="header-actions">
+          <div class="history-actions" role="group" aria-label="History">
+            <button class="icon-button" id="undoBtn" type="button" aria-label="Undo" title="Undo (⌘Z)" disabled>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 7H5v4M5.4 10.8a7 7 0 1 1 1.2 6.1" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <button class="icon-button" id="redoBtn" type="button" aria-label="Redo" title="Redo (⇧⌘Z)" disabled>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 7h4v4M18.6 10.8a7 7 0 1 0-1.2 6.1" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
+
+          <div class="output-badge" title="Output settings">
+            <span class="output-badge-icon" aria-hidden="true">Aa</span>
+            <span class="output-badge-copy">
+              <strong>Times New Roman</strong>
+              <span id="headerSizeLabel">12 pt · Word</span>
+            </span>
+          </div>
+
+          <button class="button button-primary header-copy" id="headerCopyBtn" type="button">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8.5 8.5V6.8A1.8 1.8 0 0 1 10.3 5h7.9a1.8 1.8 0 0 1 1.8 1.8v7.9a1.8 1.8 0 0 1-1.8 1.8h-1.7M4 10.3v7.9A1.8 1.8 0 0 0 5.8 20h7.9a1.8 1.8 0 0 0 1.8-1.8v-7.9A1.8 1.8 0 0 0 13.7 8.5H5.8A1.8 1.8 0 0 0 4 10.3Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+            Copy for Word
+          </button>
+        </div>
+      </header>
+
+      <nav class="menu-bar" aria-label="Application menu">
+        <div class="menu-group">
+          <button type="button" class="menu-trigger" data-menu="file">File</button>
+          <div class="menu-dropdown" id="menu-file" role="menu" aria-label="File">
+            <button type="button" class="menu-item" data-action="new"><span class="menu-check"></span><span>New equation</span><span class="menu-shortcut">⌘N</span></button>
+            <button type="button" class="menu-item" data-action="open"><span class="menu-check"></span><span>Open TeX…</span><span class="menu-shortcut">⌘O</span></button>
+            <button type="button" class="menu-item" data-action="save-tex"><span class="menu-check"></span><span>Save TeX…</span><span class="menu-shortcut">⌘S</span></button>
+            <div class="menu-separator"></div>
+            <button type="button" class="menu-item" data-action="download-svg"><span class="menu-check"></span><span>Download SVG…</span><span class="menu-shortcut">⇧⌘E</span></button>
+            <button type="button" class="menu-item" data-action="download-png"><span class="menu-check"></span><span>Download PNG…</span></button>
+            <div class="menu-separator"></div>
+            <button type="button" class="menu-item" data-action="copy-svg"><span class="menu-check"></span><span>Copy for Word</span><span class="menu-shortcut">⇧⌘C</span></button>
+            <button type="button" class="menu-item" data-action="copy-vector"><span class="menu-check"></span><span>Copy SVG (vector)</span><span class="menu-shortcut">⌥⇧⌘C</span></button>
+            <button type="button" class="menu-item" data-action="copy-latex"><span class="menu-check"></span><span>Copy LaTeX</span><span class="menu-shortcut">⌥⌘C</span></button>
+          </div>
+        </div>
+
+        <div class="menu-group">
+          <button type="button" class="menu-trigger" data-menu="edit">Edit</button>
+          <div class="menu-dropdown" id="menu-edit" role="menu" aria-label="Edit">
+            <button type="button" class="menu-item" data-action="undo"><span class="menu-check"></span><span>Undo</span><span class="menu-shortcut">⌘Z</span></button>
+            <button type="button" class="menu-item" data-action="redo"><span class="menu-check"></span><span>Redo</span><span class="menu-shortcut">⇧⌘Z</span></button>
+            <div class="menu-separator"></div>
+            <button type="button" class="menu-item" data-action="select-all"><span class="menu-check"></span><span>Select all</span><span class="menu-shortcut">⌘A</span></button>
+            <button type="button" class="menu-item" data-action="copy-latex"><span class="menu-check"></span><span>Copy LaTeX</span><span class="menu-shortcut">⌥⌘C</span></button>
+            <button type="button" class="menu-item" data-action="paste-latex"><span class="menu-check"></span><span>Paste LaTeX</span><span class="menu-shortcut">⌥⌘V</span></button>
+            <div class="menu-separator"></div>
+            <button type="button" class="menu-item" data-action="clear"><span class="menu-check"></span><span>Clear equation</span><span class="menu-shortcut">⌘⌫</span></button>
+          </div>
+        </div>
+
+        <div class="menu-group">
+          <button type="button" class="menu-trigger" data-menu="view">View</button>
+          <div class="menu-dropdown" id="menu-view" role="menu" aria-label="View">
+            <button type="button" class="menu-item" data-action="preview-inline" data-check="preview"><span class="menu-check"></span><span>Inline Word preview</span></button>
+            <button type="button" class="menu-item" data-action="preview-display" data-check="preview"><span class="menu-check"></span><span>Display Word preview</span></button>
+            <div class="menu-separator"></div>
+            <button type="button" class="menu-item" data-action="toggle-baseline" data-check="baseline"><span class="menu-check"></span><span>Baseline guides</span></button>
+            <button type="button" class="menu-item" data-action="toggle-preview"><span class="menu-check"></span><span>Show preview panel</span></button>
+            <div class="menu-separator"></div>
+            <button type="button" class="menu-item" data-action="zoom-reset"><span class="menu-check"></span><span>Reset editor zoom</span><span class="menu-shortcut">⌘0</span></button>
+          </div>
+        </div>
+
+        <div class="menu-group">
+          <button type="button" class="menu-trigger" data-menu="format">Format</button>
+          <div class="menu-dropdown" id="menu-format" role="menu" aria-label="Format">
+            <button type="button" class="menu-item" data-action="copy-svg"><span class="menu-check"></span><span>Copy for Word</span><span class="menu-shortcut">⇧⌘C</span></button>
+            <button type="button" class="menu-item" data-action="copy-vector"><span class="menu-check"></span><span>Copy SVG (vector)</span><span class="menu-shortcut">⌥⇧⌘C</span></button>
+            <button type="button" class="menu-item" data-action="toggle-baseline" data-check="baseline"><span class="menu-check"></span><span>Baseline guides</span></button>
+            <div class="menu-separator"></div>
+            <button type="button" class="menu-item" data-action="preview-inline" data-check="preview"><span class="menu-check"></span><span>Inline preview</span></button>
+            <button type="button" class="menu-item" data-action="preview-display" data-check="preview"><span class="menu-check"></span><span>Display preview</span></button>
+          </div>
+        </div>
+
+        <div class="menu-group">
+          <button type="button" class="menu-trigger" data-menu="style">Style</button>
+          <div class="menu-dropdown" id="menu-style" role="menu" aria-label="Style">
+            <button type="button" class="menu-item is-checked" disabled><span class="menu-check">✓</span><span>Times New Roman</span></button>
+            <button type="button" class="menu-item" disabled><span class="menu-check"></span><span class="menu-muted">STIX 2 · Word-compatible</span></button>
+            <div class="menu-separator"></div>
+            <button type="button" class="menu-item" data-action="font-help"><span class="menu-check"></span><span>About the output font</span></button>
+          </div>
+        </div>
+
+        <div class="menu-group">
+          <button type="button" class="menu-trigger" data-menu="size">Size</button>
+          <div class="menu-dropdown" id="menu-size" role="menu" aria-label="Size">
+            <button type="button" class="menu-item" data-action="size" data-size="10" data-check="size"><span class="menu-check"></span><span>10 pt</span></button>
+            <button type="button" class="menu-item" data-action="size" data-size="11" data-check="size"><span class="menu-check"></span><span>11 pt</span></button>
+            <button type="button" class="menu-item is-checked" data-action="size" data-size="12" data-check="size"><span class="menu-check">✓</span><span>12 pt</span><span class="menu-shortcut">Default</span></button>
+            <button type="button" class="menu-item" data-action="size" data-size="14" data-check="size"><span class="menu-check"></span><span>14 pt</span></button>
+            <button type="button" class="menu-item" data-action="size" data-size="18" data-check="size"><span class="menu-check"></span><span>18 pt</span></button>
+            <button type="button" class="menu-item" data-action="size" data-size="24" data-check="size"><span class="menu-check"></span><span>24 pt</span></button>
+            <button type="button" class="menu-item" data-action="size" data-size="36" data-check="size"><span class="menu-check"></span><span>36 pt</span></button>
+          </div>
+        </div>
+
+        <div class="menu-group">
+          <button type="button" class="menu-trigger" data-menu="preferences">Preferences</button>
+          <div class="menu-dropdown" id="menu-preferences" role="menu" aria-label="Preferences">
+            <button type="button" class="menu-item" data-action="toggle-autosave" data-check="autosave"><span class="menu-check"></span><span>Autosave locally</span></button>
+            <button type="button" class="menu-item" data-action="zoom-reset"><span class="menu-check"></span><span>Reset editor zoom</span></button>
+            <div class="menu-separator"></div>
+            <button type="button" class="menu-item" data-action="clear-local"><span class="menu-check"></span><span>Clear local data</span></button>
+          </div>
+        </div>
+
+        <div class="menu-group">
+          <button type="button" class="menu-trigger" data-menu="help">Help</button>
+          <div class="menu-dropdown" id="menu-help" role="menu" aria-label="Help">
+            <button type="button" class="menu-item" data-action="shortcuts"><span class="menu-check"></span><span>Keyboard shortcuts</span><span class="menu-shortcut">?</span></button>
+            <button type="button" class="menu-item" data-action="word-help"><span class="menu-check"></span><span>Pasting into Word</span></button>
+            <div class="menu-separator"></div>
+            <button type="button" class="menu-item" data-action="about"><span class="menu-check"></span><span>About BetterMathType</span></button>
+          </div>
+        </div>
+
+        <div class="menu-bar-spacer"></div>
+        <div class="menu-status" aria-hidden="true">
+          <span class="status-led"></span>
+          <span>Word-ready output</span>
+        </div>
+      </nav>
+
+      <section class="ribbon" aria-label="Equation toolbar">
+        <div class="ribbon-top">
+          <div class="ribbon-tabs" role="tablist" aria-label="Toolbar categories" id="ribbonTabs"></div>
+          <div class="ribbon-tools">
+            <div class="examples-wrap">
+              <button class="toolbar-chip" id="examplesBtn" type="button" aria-haspopup="menu" aria-expanded="false">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9L12 3Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M18.5 15.5 19.4 18l2.5.9-2.5.9-.9 2.5-.9-2.5-2.5-.9 2.5-.9.9-2.5Z" fill="currentColor" opacity=".5"/></svg>
+                Examples
+                <svg class="chevron" viewBox="0 0 12 12" aria-hidden="true"><path d="m3 4.5 3 3 3-3" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+              <div class="examples-menu" id="examplesMenu" role="menu" hidden></div>
+            </div>
+            <label class="search-box">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="5.8" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="m15.2 15.2 4 4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+              <input id="toolSearch" type="search" placeholder="Search symbols and templates" autocomplete="off" spellcheck="false" aria-label="Search symbols and templates" />
+              <kbd>⌘K</kbd>
+            </label>
+          </div>
+        </div>
+        <div class="ribbon-body" id="ribbonBody"></div>
+        <div class="search-results" id="searchResults" hidden></div>
+      </section>
+
+      <main class="workspace" id="workspace">
+        <section class="card editor-card" aria-labelledby="editorTitle">
+          <div class="card-header">
+            <div class="card-title">
+              <span class="eyebrow">Workspace</span>
+              <h1 id="editorTitle">Equation</h1>
+            </div>
+            <div class="editor-header-actions">
+              <span class="quiet-badge" id="statusBadge"><span class="quiet-dot"></span> Ready</span>
+              <button class="small-button" id="clearBtn" type="button">Clear</button>
+            </div>
+          </div>
+
+          <div class="editor-surface" id="editorSurface">
+            <div class="editor-hint" id="emptyHint">
+              <span class="hint-mark">∑</span>
+              <span>Type LaTeX or choose a template above</span>
+            </div>
+            <div id="mathfieldSlot"></div>
+          </div>
+
+          <div class="source-row">
+            <span class="source-label">TeX</span>
+            <code class="source-code" id="latexCode" aria-live="off"></code>
+            <button class="source-copy" id="copyLatexBtn" type="button" aria-label="Copy LaTeX" title="Copy LaTeX">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8.5 8.5V6.8A1.8 1.8 0 0 1 10.3 5h7.9a1.8 1.8 0 0 1 1.8 1.8v7.9a1.8 1.8 0 0 1-1.8 1.8h-1.7M4 10.3v7.9A1.8 1.8 0 0 0 5.8 20h7.9a1.8 1.8 0 0 0 1.8-1.8v-7.9A1.8 1.8 0 0 0 13.7 8.5H5.8A1.8 1.8 0 0 0 4 10.3Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
+
+          <div class="editor-footer">
+            <div class="key-hints" aria-label="Keyboard hints">
+              <span><kbd>⌘Z</kbd> undo</span>
+              <span><kbd>⌘K</kbd> search</span>
+              <span><kbd>⇧⌘C</kbd> copy for Word</span>
+            </div>
+            <span class="editor-engine">MathLive input · MathJax STIX 2 output</span>
+          </div>
+        </section>
+
+        <aside class="card preview-card" id="previewPanel" aria-labelledby="previewTitle">
+          <div class="card-header preview-header">
+            <div class="card-title">
+              <span class="eyebrow">Microsoft Word</span>
+              <h2 id="previewTitle">Live preview</h2>
+            </div>
+            <div class="segmented-control" role="group" aria-label="Preview layout">
+              <button type="button" data-preview-mode="inline" class="is-active">Inline</button>
+              <button type="button" data-preview-mode="display">Display</button>
+            </div>
+          </div>
+
+          <div class="word-page" id="wordPage">
+            <div class="word-page-bar">
+              <span>Document1</span>
+              <span>Times New Roman · <span id="pageSizeLabel">12</span> pt</span>
+            </div>
+            <div class="word-content">
+              <p class="word-line" id="inlinePreview">
+                Given the working above, we obtain
+                <span class="equation-inline" id="inlineEquation" aria-live="polite"></span>
+                for every value in the domain.
+              </p>
+              <div class="display-equation" id="displayEquation" aria-live="polite" hidden></div>
+              <div class="preview-empty" id="previewEmpty">
+                <span class="preview-empty-mark">√</span>
+                <p>Your equation will appear here at exactly <strong><span data-size-text>12</span> pt</strong>.</p>
+              </div>
+            </div>
+            <div class="baseline-guide" id="baselineGuide" hidden>
+              <span class="baseline-label">baseline</span>
+              <span class="x-height-label">x-height</span>
+            </div>
+          </div>
+
+          <div class="measure-row">
+            <span id="dimensionsLabel" class="dimensions">No equation yet</span>
+            <span class="measure-divider" aria-hidden="true"></span>
+            <span class="vector-label"><span class="vector-dot"></span> Vector SVG</span>
+          </div>
+
+          <div class="preview-actions">
+            <button class="button button-primary button-wide" id="copySvgBtn" type="button" disabled>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8.5 8.5V6.8A1.8 1.8 0 0 1 10.3 5h7.9a1.8 1.8 0 0 1 1.8 1.8v7.9a1.8 1.8 0 0 1-1.8 1.8h-1.7M4 10.3v7.9A1.8 1.8 0 0 0 5.8 20h7.9a1.8 1.8 0 0 0 1.8-1.8v-7.9A1.8 1.8 0 0 0 13.7 8.5H5.8A1.8 1.8 0 0 0 4 10.3Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+              <span>Copy for Word</span>
+            </button>
+            <button class="button button-secondary" id="downloadSvgBtn" type="button" disabled aria-label="Download SVG" title="Download SVG">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v10m0 0 4-4m-4 4-4-4M5 18.5h14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
+
+          <p class="paste-tip">
+            <span class="word-badge" aria-hidden="true">W</span>
+            Paste in Word with <kbd id="pasteShortcut">⌘V</kbd>. High-resolution PNG, sized to the exact point size.
+          </p>
+
+          <div class="recent-block" id="recentBlock" hidden>
+            <div class="recent-heading">Recent copies</div>
+            <div class="recent-list" id="recentList"></div>
+          </div>
+        </aside>
+      </main>
+
+      <footer class="status-bar">
+        <div class="status-left">
+          <span class="status-led is-ready" id="engineLed"></span>
+          <span id="engineStatus">Starting rendering engine…</span>
+        </div>
+        <div class="status-center">
+          <span class="status-chip">Times New Roman</span>
+          <span class="status-chip status-chip-soft">STIX 2</span>
+          <span class="status-chip status-chip-soft">SVG</span>
+        </div>
+        <div class="status-right">
+          <span class="zoom-label">Editor</span>
+          <button type="button" class="zoom-button" id="zoomOutBtn" aria-label="Zoom out">−</button>
+          <button type="button" class="zoom-value" id="zoomValue" title="Reset editor zoom">150%</button>
+          <button type="button" class="zoom-button" id="zoomInBtn" aria-label="Zoom in">+</button>
+        </div>
+      </footer>
+    </div>
+
+    <div class="toast-stack" id="toastStack" aria-live="polite" aria-atomic="true"></div>
+    <div class="tooltip" id="tooltip" role="tooltip" hidden></div>
+
+    <dialog class="dialog" id="infoDialog">
+      <div class="dialog-header">
+        <div>
+          <span class="eyebrow" id="infoEyebrow">BetterMathType</span>
+          <h2 id="infoTitle">Information</h2>
+        </div>
+        <button type="button" class="dialog-close" data-close-dialog aria-label="Close">×</button>
+      </div>
+      <div class="dialog-body" id="infoBody"></div>
+      <div class="dialog-footer">
+        <button type="button" class="button button-secondary" data-close-dialog>Close</button>
+      </div>
+    </dialog>
+
+    <dialog class="dialog dialog-copy" id="copyDialog">
+      <div class="dialog-header">
+        <div>
+          <span class="eyebrow">Manual fallback</span>
+          <h2>Copy the SVG source</h2>
+        </div>
+        <button type="button" class="dialog-close" data-close-dialog aria-label="Close">×</button>
+      </div>
+      <div class="dialog-body">
+        <p>Your browser blocked image clipboard access. Select the SVG source below and copy it, or use the download button.</p>
+        <textarea id="svgSource" readonly spellcheck="false"></textarea>
+      </div>
+      <div class="dialog-footer">
+        <button type="button" class="button button-secondary" data-close-dialog>Close</button>
+        <button type="button" class="button button-primary" id="downloadFromDialogBtn">Download SVG</button>
+      </div>
+    </dialog>
+
+    <input type="file" id="fileInput" accept=".tex,.txt,text/plain,application/x-tex" hidden />
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

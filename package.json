@@ -1,0 +1,28 @@
+{
+  "name": "bettermathtype",
+  "version": "1.0.0",
+  "description": "A MathType-inspired equation editor with Times New Roman SVG output for Microsoft Word.",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "keywords": [
+    "mathtype",
+    "equation-editor",
+    "mathlive",
+    "mathjax",
+    "svg",
+    "word"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "mathjax-full": "^3.2.2",
+    "mathjax-stix2-font": "^4.0.0-beta.7",
+    "mathlive": "^0.111.4",
+    "vite": "^8.3.5"
+  }
+}
