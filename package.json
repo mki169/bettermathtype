@@ -1,7 +1,7 @@
 {
   "name": "bettermathtype",
   "version": "1.0.0",
-  "description": "A MathType-inspired equation editor with Times New Roman SVG output for Microsoft Word.",
+  "description": "A MathType-inspired equation editor with Times New Roman SVG and PNG output for Microsoft Word.",
   "private": true,
   "type": "module",
   "scripts": {

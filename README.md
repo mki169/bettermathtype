@@ -5,15 +5,16 @@
 <h1 align="center">BetterMathType</h1>
 
 <p align="center">
-  <strong>A MathType-inspired equation editor with Word-ready SVG output.</strong><br />
-  Write LaTeX, preview it at true point size, and paste crisp vector equations into Microsoft Word.
+  <strong>A MathType-inspired equation editor with Word-ready output.</strong><br />
+  Write LaTeX, preview it at true point size, and paste crisp equations into Microsoft Word.
 </p>
 
 <p align="center">
+  <a href="https://github.com/mki169/bettermathtype/actions/workflows/ci.yml"><img src="https://github.com/mki169/bettermathtype/actions/workflows/ci.yml/badge.svg?branch=main" alt="CI status" /></a>
   <a href="https://vite.dev"><img src="https://img.shields.io/badge/Vite-8-646CFF?logo=vite&logoColor=white" alt="Vite 8" /></a>
   <a href="https://mathlive.io"><img src="https://img.shields.io/badge/MathLive-0.111-1a9a6e" alt="MathLive" /></a>
   <a href="https://www.mathjax.org"><img src="https://img.shields.io/badge/MathJax-3.2-0b5cad" alt="MathJax 3" /></a>
-  <img src="https://img.shields.io/badge/output-SVG%20for%20Word-2b579a?logo=microsoftword&logoColor=white" alt="SVG output for Word" />
+  <img src="https://img.shields.io/badge/output-Word%20ready-2b579a?logo=microsoftword&logoColor=white" alt="Word ready output" />
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-ISC-blue" alt="ISC license" /></a>
   <a href="CONTRIBUTING.md"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen" alt="PRs welcome" /></a>
   <a href="docs/TRANSLATING.md"><img src="https://img.shields.io/badge/translations-welcome-1a9a6e" alt="Translations welcome" /></a>
@@ -36,6 +37,7 @@
 ## Contents
 
 - [Features](#features)
+- [Gallery](#gallery)
 - [Quick start](#quick-start)
 - [Usage](#usage)
 - [Keyboard shortcuts](#keyboard-shortcuts)
@@ -51,14 +53,27 @@
 
 ## Features
 
-- **Word-first output.** MathJax renders equations with the STIX 2 font and flattens glyphs to SVG paths. Word does not need STIX installed, and equations stay sharp at any print size.
+- **Word-first output.** MathJax renders equations with the STIX 2 font, and the app flattens glyphs into SVG paths. The Word clipboard receives a high-resolution PNG sized to the chosen point size, so Word needs no special fonts. SVG remains available for vector workflows.
 - **True point sizes.** Choose 10–36 pt and see the output dimensions before copying. The preview is measured against the Word-style page.
 - **MathType-style workflow.** A ribbon of fractions, scripts, roots, delimiters, calculus, matrices, symbols, Greek letters, and accents, plus examples and symbol search.
 - **Visual and LaTeX input.** Edit structure with MathLive or type LaTeX directly. Smart fences and smart superscript are enabled by default.
-- **Vector and raster export.** Copy for Word, copy the raw SVG, download SVG or PNG, and copy the LaTeX source.
+- **Vector and raster export.** Copy for Word as a high-resolution PNG, copy or download the raw SVG, export PNG, and copy the LaTeX source.
 - **Private by design.** Everything runs locally in the browser. There is no backend, account, analytics, or network dependency.
 - **Dark mode.** Follows the operating system by default, with a persistent manual override.
 - **Keyboard-driven.** Undo, redo, search, export, and clipboard actions all have shortcuts.
+
+## Gallery
+
+<p align="center">
+  <img src="docs/screenshots/display-preview.png" alt="Display equation preview at 24 pt against a Word-style page" width="100%" />
+</p>
+<p align="center"><em>Display equations at the selected point size against a Word-style page.</em></p>
+
+<p align="center">
+  <img src="docs/screenshots/symbol-search.png" alt="Symbol search with integral templates" width="49%" />
+  <img src="docs/screenshots/export-menu.png" alt="File menu with export actions in dark mode" width="49%" />
+</p>
+<p align="center"><em>Search every symbol and template from the ribbon, and copy or export from the File menu. Dark mode included.</em></p>
 
 ## Quick start
 
@@ -87,7 +102,7 @@ The build is written to `dist/`. Preview serves it at `http://localhost:4173` by
 1. Type LaTeX into the equation field, or insert symbols and templates from the ribbon.
 2. Choose an output size from **Size** and an inline or display layout from the preview controls.
 3. Check the result against the live Word page. The measured width and height are shown below it.
-4. Select **Copy for Word** to place a vector equation on the clipboard.
+4. Select **Copy for Word** to place a high-resolution equation image on the clipboard.
 5. Paste into Microsoft Word with `Cmd+V` on macOS or `Ctrl+V` on Windows.
 
 The same output is available from the **File** menu as SVG, PNG, LaTeX, or a vector clipboard copy. Recent equations are kept locally for quick reuse.
@@ -114,14 +129,14 @@ Undo and redo use the editor's native `Cmd+Z` / `Ctrl+Z` and `Shift+Cmd+Z` / `Ct
 
 ## How it works
 
-```text
-MathLive editor -> LaTeX -> MathJax (STIX 2) -> SVG paths -> Word / SVG / PNG
-```
+<p align="center">
+  <img src="docs/architecture.svg" alt="Rendering pipeline: MathLive produces LaTeX, MathJax typesets it with STIX 2, the SVG is normalized, and the result feeds Word, downloads, and the live preview" width="100%" />
+</p>
 
 1. **Input.** MathLive maintains the structured equation and exposes its LaTeX source.
 2. **Typesetting.** MathJax renders the expression with STIX 2, a Times-compatible math font, at the selected point size.
 3. **Normalization.** The generated SVG is measured, sanitized, given explicit dimensions, and its `<use>` glyph references are flattened into paths.
-4. **Output.** The resulting vector image is written to the clipboard or exported as SVG/PNG. The preview and the export share the same rendering path.
+4. **Output.** The SVG feeds the live preview and SVG/PNG downloads. For Word, it is rasterized to a high-resolution PNG at the selected point size and placed on the clipboard.
 
 All rendering happens in the browser. There is no server component and no external font or rendering request.
 
@@ -210,9 +225,13 @@ Use **Preferences → Clear local data** to remove the document and recent histo
 .
 ├── .github/
 │   ├── ISSUE_TEMPLATE/     Bug, feature, and translation issue forms
+│   ├── workflows/          CI build and smoke test
+│   ├── CODEOWNERS
+│   ├── dependabot.yml
 │   └── PULL_REQUEST_TEMPLATE.md
 ├── docs/
-│   ├── screenshots/        README screenshots
+│   ├── screenshots/        README gallery screenshots
+│   ├── architecture.svg    Rendering pipeline diagram
 │   └── TRANSLATING.md      Translation guide
 ├── public/
 │   ├── favicon.svg
@@ -248,7 +267,7 @@ Contributions are welcome. Read [CONTRIBUTING.md](CONTRIBUTING.md) for developme
 - [Request a feature](https://github.com/mki169/bettermathtype/issues/new?template=feature_request.yml)
 - [Start a translation](https://github.com/mki169/bettermathtype/issues/new?template=translation.yml)
 
-There is currently no automated test suite, so browser verification is the primary check.
+There is currently no automated test suite, so browser verification is the primary check. CI builds and smoke-tests every change, and Dependabot keeps dependencies current.
 
 ## License
 

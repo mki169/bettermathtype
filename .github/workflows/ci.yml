@@ -1,0 +1,59 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build and smoke test
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Check JavaScript syntax
+        run: |
+          for file in src/*.js; do
+            node --check "$file"
+          done
+
+      - name: Build production bundle
+        run: npm run build
+
+      - name: Smoke test production build
+        run: |
+          npx vite preview --host 127.0.0.1 --port 4173 --strictPort &
+          SERVER_PID=$!
+          trap 'kill "$SERVER_PID"' EXIT
+
+          for attempt in $(seq 1 30); do
+            if curl -fsS http://127.0.0.1:4173/ >/dev/null 2>&1; then
+              break
+            fi
+            sleep 1
+          done
+
+          curl -fsS http://127.0.0.1:4173/ | grep -q 'BetterMathType'
+          curl -fsS -o /dev/null http://127.0.0.1:4173/vendor/mathjax-stix2.js
+          curl -fsS -o /dev/null http://127.0.0.1:4173/mathlive-fonts/KaTeX_Main-Regular.woff2

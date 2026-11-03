@@ -9,6 +9,7 @@ This guide covers:
 - [Project conventions](#project-conventions)
 - [Issues](#issues)
 - [Pull requests](#pull-requests)
+- [Automated checks](#automated-checks)
 - [Translations](#translations)
 - [Review and merge](#review-and-merge)
 - [License](#license)
@@ -80,6 +81,17 @@ Add Spanish README translation
 ```
 
 Small, readable commits are preferred over a single large commit. Do not force-push after review has started unless asked to.
+
+## Automated checks
+
+Every push to `main` and every pull request runs the CI workflow in `.github/workflows/ci.yml`. It:
+
+- installs dependencies with `npm ci`
+- checks the JavaScript syntax in `src/`
+- builds the production bundle
+- smoke-tests the built site and its required static assets
+
+Dependabot opens weekly pull requests for npm and GitHub Actions updates. Let CI validate those changes and keep unrelated edits out of dependency pull requests.
 
 ## Translations
 

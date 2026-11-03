@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400" width="1200" height="400" role="img" aria-labelledby="pipeline-title pipeline-desc">
+  <title id="pipeline-title">BetterMathType rendering pipeline</title>
+  <desc id="pipeline-desc">MathLive produces LaTeX, MathJax typesets it with STIX 2 into SVG, the SVG is normalized, and the result feeds the Word clipboard, SVG and PNG downloads, and the live preview.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 6" refX="9" refY="3" markerWidth="10" markerHeight="6" orient="auto">
+      <path d="M0 0 10 3 0 6Z" fill="#a9b6cc"/>
+    </marker>
+  </defs>
+
+  <rect width="1200" height="400" rx="24" fill="#f7f9ff"/>
+
+  <text x="48" y="50" fill="#8b95a6" font-family="Inter, -apple-system, 'Segoe UI', sans-serif" font-size="12" font-weight="700" letter-spacing="2.2">RENDERING PIPELINE</text>
+
+  <rect x="40" y="90" width="250" height="190" rx="18" fill="#ffffff" stroke="#dbe3f2" stroke-width="1.5"/>
+  <rect x="64" y="116" width="48" height="48" rx="12" fill="#eef3ff"/>
+  <text x="88" y="149" fill="#2355d8" font-family="'Times New Roman', serif" font-size="28" font-weight="600" text-anchor="middle">∑</text>
+  <text x="128" y="135" fill="#17202e" font-family="Inter, -apple-system, 'Segoe UI', sans-serif" font-size="20" font-weight="700">MathLive</text>
+  <text x="128" y="157" fill="#707a8b" font-family="Inter, -apple-system, 'Segoe UI', sans-serif" font-size="13">Structured input</text>
+  <circle cx="68" cy="205" r="3" fill="#2355d8"/>
+  <text x="80" y="210" fill="#3c4759" font-family="Inter, -apple-system, 'Segoe UI', sans-serif" font-size="14">Visual editing and direct LaTeX</text>
+  <circle cx="68" cy="235" r="3" fill="#2355d8"/>
+  <text x="80" y="240" fill="#3c4759" font-family="Inter, -apple-system, 'Segoe UI', sans-serif" font-size="14">Fractions · scripts · matrices</text>
+
+  <rect x="350" y="90" width="250" height="190" rx="18" fill="#ffffff" stroke="#dbe3f2" stroke-width="1.5"/>
+  <rect x="374" y="116" width="48" height="48" rx="12" fill="#e8f7f0"/>
+  <text x="398" y="149" fill="#15825d" font-family="'Times New Roman', serif" font-size="30" font-weight="600" text-anchor="middle">∫</text>
+  <text x="438" y="135" fill="#17202e" font-family="Inter, -apple-system, 'Segoe UI', sans-serif" font-size="20" font-weight="700">MathJax</text>
+  <text x="438" y="157" fill="#707a8b" font-family="Inter, -apple-system, 'Segoe UI', sans-serif" font-size="13">STIX 2 typesetting</text>
+  <circle cx="378" cy="205" r="3" fill="#15825d"/>
+  <text x="390" y="210" fill="#3c4759" font-family="Inter, -apple-system, 'Segoe UI', sans-serif" font-size="14">Times-compatible metrics</text>
+  <circle cx="378" cy="235" r="3" fill="#15825d"/>
+  <text x="390" y="240" fill="#3c4759" font-family="Inter, -apple-system, 'Segoe UI', sans-serif" font-size="14">Rendered at the selected point size</text>
+
+  <rect x="660" y="90" width="250" height="190" rx="18" fill="#ffffff" stroke="#dbe3f2" stroke-width="1.5"/>
+  <rect x="684" y="116" width="48" height="48" rx="12" fill="#fbf8ef"/>
+  <text x="708" y="149" fill="#c78b1a" font-family="'Times New Roman', serif" font-size="26" font-weight="600" text-anchor="middle">◇</text>
+  <text x="748" y="135" fill="#17202e" font-family="Inter, -apple-system, 'Segoe UI', sans-serif" font-size="20" font-weight="700">Normalizer</text>
+  <text x="748" y="157" fill="#707a8b" font-family="Inter, -apple-system, 'Segoe UI', sans-serif" font-size="13">SVG cleanup</text>
+  <circle cx="688" cy="205" r="3" fill="#c78b1a"/>
+  <text x="700" y="210" fill="#3c4759" font-family="Inter, -apple-system, 'Segoe UI', sans-serif" font-size="14">Glyphs flattened into paths</text>
+  <circle cx="688" cy="235" r="3" fill="#c78b1a"/>
+  <text x="700" y="240" fill="#3c4759" font-family="Inter, -apple-system, 'Segoe UI', sans-serif" font-size="14">Measured, sized, and sanitized</text>
+
+  <rect x="970" y="70" width="190" height="230" rx="18" fill="#ffffff" stroke="#dbe3f2" stroke-width="1.5"/>
+  <text x="990" y="102" fill="#17202e" font-family="Inter, -apple-system, 'Segoe UI', sans-serif" font-size="18" font-weight="700">Outputs</text>
+  <text x="990" y="123" fill="#707a8b" font-family="Inter, -apple-system, 'Segoe UI', sans-serif" font-size="12">One render, three outputs</text>
+
+  <rect x="988" y="132" width="154" height="48" rx="10" fill="#f7f9ff" stroke="#dbe3f2"/>
+  <text x="1000" y="153" fill="#17202e" font-family="Inter, -apple-system, 'Segoe UI', sans-serif" font-size="13" font-weight="600">Word clipboard</text>
+  <text x="1000" y="170" fill="#707a8b" font-family="Inter, -apple-system, 'Segoe UI', sans-serif" font-size="11.5">High-resolution PNG</text>
+
+  <rect x="988" y="190" width="154" height="48" rx="10" fill="#f7f9ff" stroke="#dbe3f2"/>
+  <text x="1000" y="211" fill="#17202e" font-family="Inter, -apple-system, 'Segoe UI', sans-serif" font-size="13" font-weight="600">SVG / PNG</text>
+  <text x="1000" y="228" fill="#707a8b" font-family="Inter, -apple-system, 'Segoe UI', sans-serif" font-size="11.5">File downloads</text>
+
+  <rect x="988" y="248" width="154" height="48" rx="10" fill="#eef3ff" stroke="#c4d3f7"/>
+  <text x="1000" y="269" fill="#173fa9" font-family="Inter, -apple-system, 'Segoe UI', sans-serif" font-size="13" font-weight="600">Live preview</text>
+  <text x="1000" y="286" fill="#2355d8" font-family="Inter, -apple-system, 'Segoe UI', sans-serif" font-size="11.5">Word-style page</text>
+
+  <line x1="290" y1="185" x2="344" y2="185" stroke="#a9b6cc" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <text x="317" y="172" fill="#8b95a6" font-family="Inter, -apple-system, 'Segoe UI', sans-serif" font-size="11" font-weight="600" text-anchor="middle">LaTeX</text>
+
+  <line x1="600" y1="185" x2="654" y2="185" stroke="#a9b6cc" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <text x="627" y="172" fill="#8b95a6" font-family="Inter, -apple-system, 'Segoe UI', sans-serif" font-size="11" font-weight="600" text-anchor="middle">SVG</text>
+
+  <line x1="910" y1="185" x2="964" y2="185" stroke="#a9b6cc" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <text x="937" y="172" fill="#8b95a6" font-family="Inter, -apple-system, 'Segoe UI', sans-serif" font-size="11" font-weight="600" text-anchor="middle">paths</text>
+
+  <line x1="48" y1="312" x2="1152" y2="312" stroke="#e2e8f5" stroke-width="1.5"/>
+  <circle cx="396" cy="350" r="4" fill="#1a9a6e"/>
+  <text x="410" y="355" fill="#707a8b" font-family="Inter, -apple-system, 'Segoe UI', sans-serif" font-size="14">Runs entirely in the browser · no backend · no external font or rendering requests</text>
+</svg>
