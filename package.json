@@ -29,7 +29,7 @@
   "bugs": {
     "url": "https://github.com/mki169/bettermathtype/issues"
   },
-  "homepage": "https://github.com/mki169/bettermathtype#readme",
+  "homepage": "https://bettermathtype.vercel.app",
   "dependencies": {
     "mathjax-full": "^3.2.2",
     "mathjax-stix2-font": "^4.0.0-beta.7",
