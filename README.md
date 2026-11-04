@@ -18,11 +18,16 @@
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-ISC-blue" alt="ISC license" /></a>
   <a href="CONTRIBUTING.md"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen" alt="PRs welcome" /></a>
   <a href="docs/TRANSLATING.md"><img src="https://img.shields.io/badge/translations-welcome-1a9a6e" alt="Translations welcome" /></a>
+  <a href="https://bettermathtype.vercel.app"><img src="https://img.shields.io/badge/live-bettermathtype.vercel.app-000000?logo=vercel&logoColor=white" alt="Live app" /></a>
   <a href="https://github.com/mki169/bettermathtype"><img src="https://img.shields.io/github/stars/mki169/bettermathtype?style=social" alt="GitHub stars" /></a>
 </p>
 
 <p align="center">
   <a href="https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fmki169%2Fbettermathtype"><img src="https://vercel.com/button" alt="Deploy with Vercel" /></a>
+</p>
+
+<p align="center">
+  <a href="https://bettermathtype.vercel.app"><strong>Try it live at bettermathtype.vercel.app</strong></a>
 </p>
 
 <p align="center">
@@ -97,7 +102,9 @@ If it saves you time, please [star the repository](https://github.com/mki169/bet
 
 ## Quick start
 
-Requirements: Node.js `^20.19.0` or `>=22.12.0` (required by Vite 8) and npm.
+Try it without installing: **https://bettermathtype.vercel.app**
+
+To run locally, you need Node.js `^20.19.0` or `>=22.12.0` (required by Vite 8) and npm.
 
 ```bash
 git clone https://github.com/mki169/bettermathtype.git
@@ -161,6 +168,8 @@ Undo and redo use the editor's native `Cmd+Z` / `Ctrl+Z` and `Shift+Cmd+Z` / `Ct
 All rendering happens in the browser. There is no server component and no external font or rendering request.
 
 ## Deployment
+
+The public deployment is live at **https://bettermathtype.vercel.app**. The Vercel project is connected to this repository, so pushes to `main` deploy automatically.
 
 The app is a static single-page site. Both platforms use the same build settings:
 
