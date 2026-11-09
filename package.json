@@ -34,6 +34,6 @@
     "mathjax-full": "^3.2.2",
     "mathjax-stix2-font": "^4.0.0-beta.7",
     "mathlive": "^0.111.4",
-    "vite": "^8.3.5"
+    "vite": "^8.3.6"
   }
 }
